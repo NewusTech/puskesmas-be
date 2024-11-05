@@ -20,11 +20,11 @@ module.exports = {
       }
     }
   ],
-  "parserOptions": {
-    "ecmaVersion": "latest"
+  parserOptions: {
+    ecmaVersion: 'latest'
   },
   rules: {
     'n/no-path-concat': 'off',
-    'camelcase' : 'off'
+    camelcase: 'off'
   }
 }
