@@ -3,7 +3,7 @@ const db = require('.')
 const Role = require('../models/Role')
 
 const User = db.define(
-  'User',
+  'users',
 
   {
     name: {
@@ -26,10 +26,6 @@ const User = db.define(
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    userinfo_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true
@@ -41,15 +37,18 @@ const User = db.define(
     resetpasswordexpires: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
     }
   },
   {
 
     tableName: 'users',
-    timestamps: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-    deletedAt: 'deleted_at'
+    timestamps: true
   }
 )
 Role.hasMany(User, {

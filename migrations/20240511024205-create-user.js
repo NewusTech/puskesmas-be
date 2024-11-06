@@ -33,6 +33,8 @@ module.exports = {
       },
       role_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 1,
       },
       resetpasswordtoken: {
         type: Sequelize.STRING
@@ -51,21 +53,21 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    });
-
-    await queryInterface.addConstraint('users', {
-      fields: ['role_id'],
-      type: 'foreign key',
-      name: 'custom_fkey_role_id',
-      references: {
-        table: 'Roles',
-        field: 'id'
-      },
-      onDelete: 'SET NULL'
+    }).then(() => {
+      queryInterface.addConstraint('users', {
+        fields: ['role_id'],
+        type: 'foreign key',
+        name: 'users_role_id_fkey',
+        references: {
+          table: 'roles',
+          field: 'id'
+        },
+        onDelete: 'CASCADE'
+      });
     });
   },
   async down(queryInterface, Sequelize) {
-    await  queryInterface.removeConstraint('users', 'custom_fkey_role_id')
+    // await queryInterface.removeConstraint('users', 'users_role_id_fkey');
     await queryInterface.dropTable('Users');
   }
 };

@@ -2,20 +2,17 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const Roles = [
       {
-        name: 'Super Admin'
-      },
-      {
         name: 'Admin'
       },
       {
-        name: 'User'
-      }
+        name: 'Super Admin'
+      },
     ];
 
-    await queryInterface.bulkInsert('Roles', Roles, {});
+    await queryInterface.bulkInsert('roles', Roles, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Roles', null, {});
+    await queryInterface.bulkDelete('roles', null, {});
   }
 };

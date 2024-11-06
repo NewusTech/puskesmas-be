@@ -1,4 +1,3 @@
-
 class Pagination {
   constructor (page, size, baseUrl) {
     this.page = page || 0
@@ -10,17 +9,15 @@ class Pagination {
   data (count, data) {
     return {
       total_item: count,
-      page: this.page !== 0 ? this.page : 0,
+      page: this.page,
       item: data,
-      total_pages: Math.ceil(data.count / this.limit),
-      totalCount: data.count,
+      total_pages: Math.ceil(count / this.limit),
       links: {
         prev: this.page > 1 ? `${this.baseUrl}?page=${this.page - 1}&limit=${this.limit}` : null,
-        next: this.page < this.total_pages ? `${this.baseUrl}?page=${this.page + 1}&limit=${this.limit}` : null
+        next: this.page + 1 < Math.ceil(count / this.limit) ? `${this.baseUrl}?page=${this.page + 1}&limit=${this.limit}` : null
       }
     }
   }
 }
 
 module.exports = Pagination
-

@@ -1,3 +1,5 @@
+const baseConfig = require('../config/base.config')
+
 module.exports = {
 
   response: (status, message, data) => {
@@ -5,12 +7,14 @@ module.exports = {
       return {
         status,
         message,
-        data
+        data,
+        app_name: baseConfig.web_name
       }
     }
     return {
       status,
-      message
+      message,
+      app_name: baseConfig.web_name
     }
   }
 

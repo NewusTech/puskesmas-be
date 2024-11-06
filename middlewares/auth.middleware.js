@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const baseConfig = require('../config/base.config')
 const { response } = require('../helpers/response.formatter')
-const { Token } = require('../models-trash')
+const Token = require('../models/Token')
 
 const checkRolesAndLogout = (allowedRoles) => async (req, res, next) => {
   let token
@@ -27,7 +27,6 @@ const checkRolesAndLogout = (allowedRoles) => async (req, res, next) => {
         res.status(403).json(response(403, 'Unauthorized: already logged out'))
         return
       }
-
       if (allowedRoles.includes(data.role)) {
         next()
       } else {

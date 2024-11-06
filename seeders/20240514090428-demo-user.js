@@ -11,7 +11,7 @@ module.exports = {
         email: 'super.test@e-puskes.com',
         password: passwordHash.generate('password'),
         phone: '123456789xxx',
-        role_id: 1,
+        role_id: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -29,7 +29,7 @@ module.exports = {
         email: 'user.test@e-puskes.com',
         password: passwordHash.generate('password'),
         phone: '123456789xxx',
-        role_id: 3,
+        role_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }

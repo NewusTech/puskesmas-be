@@ -51,7 +51,7 @@ const AuthController = {
         name,
         email,
         password: hashedPassword,
-        role_id: 2
+        role_id: 3
       })
       logger.info('User created' + newUser)
       return res.status(200).json(response(200, 'Register Success'))
@@ -118,11 +118,20 @@ const AuthController = {
         baseConfig.auth_secret,
         { expiresIn: 864000 }
       )
-      await Token.create({
-        token
-      })
+      // await Token.create({
+      //   token
+      // })
 
-      return res.status(200).json(response(200, 'Login Success', { token }))
+      const responseData = {
+        name: user.name,
+        email: user.email,
+        role: user.Role.name,
+        user_data: user.UserData,
+        token,
+        type: 'Bearer'
+      }
+
+      return res.status(200).json(response(200, 'Login Success', responseData))
     } catch (error) {
       logger.error(error)
       return res.status(500).json(response(500, 'Internal Server Error'))
@@ -132,8 +141,8 @@ const AuthController = {
   logoutUser: async (req, res) => {
     try {
       const token = req.headers.authorization
-      await Token.destroy({
-        where: {
+      await Token.craete({
+        data: {
           token
         }
       })

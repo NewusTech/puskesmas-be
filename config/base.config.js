@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 module.exports = {
-  web_name: process.env.WEB_NAME,
+  web_name: process.env.WEB_NAME || 'Node.js API Boilerplate',
   base_url: process.env.BASE_URL,
   api_url: process.env.API_URL || '/api/',
 

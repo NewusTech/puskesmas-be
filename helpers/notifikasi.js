@@ -11,7 +11,7 @@ const notifikasi = async (dataGet, pesansocket) => {
     const newNotification = {
       id: Date.now(),
       data_id: dataGet.id,
-      userinfo: dataGet.userinfo_id,
+      // userinfo: dataGet.,
       isopen: 0,
       title: `Pendataan ${pesansocket}`,
       description: `Yth. ${dataGet?.Userinfo?.name}, pendataan Anda dengan id toponim ${dataGet?.id} telah selesai diproses.`,

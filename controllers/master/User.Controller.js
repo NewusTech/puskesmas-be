@@ -13,13 +13,16 @@ const v = new Validator()
 const UserController = {
   getAllUser: async (req, res) => {
     const { showDeleted = null } = req.query
+
     const page = new Pagination(
       parseInt(req.query.page),
-      parseInt(req.query.limit)
+      parseInt(req.query.limit),
+      '/users'
     )
     try {
       const conditionsoftDelete = showDeleted === 'true' ? { [Op.not]: null } : { deletedAt: null }
 
+      console.log(conditionsoftDelete)
       const { count, rows } = await User.findAndCountAll(
         {
           include: [
@@ -31,9 +34,7 @@ const UserController = {
               model: UserData
             }
           ],
-          where: {
-            deletedAt: conditionsoftDelete
-          },
+          where: conditionsoftDelete,
           limit: page.limit,
           offset: page.offset,
           order: [
@@ -41,8 +42,8 @@ const UserController = {
           ]
         }
       )
-      const response = page.data(count, rows)
-      return res.status(200).json(response(200, 'Success', response))
+      const responseData = page.data(count, rows)
+      return res.status(200).json(response(200, 'Success', responseData))
     } catch (error) {
       logger.error(error)
       return res.status(500).json(response(500, 'Internal Server Error'))
@@ -59,7 +60,7 @@ const UserController = {
         where: {
           [Op.and]: [
             { id },
-            { deletedAt: conditionsoftDelete }
+            conditionsoftDelete
           ]
         },
         include: [
@@ -120,10 +121,11 @@ const UserController = {
       const newUser = await User.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        role_id: 1
       })
       logger.info('User created' + newUser)
-      return res.status(200).json(response(200, 'Register Success'))
+      return res.status(200).json(response(200, 'Create User Success'))
     } catch (error) {
       logger.error(error)
       return res.status(500).json(response(500, 'Internal Server Error'))
