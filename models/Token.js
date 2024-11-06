@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const db = require('.')
 
 const Token = db.define(
-  'Tokens',
+  'Token',
   {
     token: {
       type: DataTypes.STRING,
@@ -10,6 +10,7 @@ const Token = db.define(
     }
   },
   {
+    tableName: 'Tokens',
     timestamps: true
   }
 )

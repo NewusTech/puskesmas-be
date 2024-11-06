@@ -1,8 +1,10 @@
 const { DataTypes } = require('sequelize')
 const db = require('.')
+const Role = require('../models/Role')
 
 const User = db.define(
-  'users', // table name
+  'User',
+
   {
     name: {
       type: DataTypes.STRING,
@@ -42,20 +44,21 @@ const User = db.define(
     }
   },
   {
+
+    tableName: 'users',
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     deletedAt: 'deleted_at'
   }
 )
-
-User.associate = (models) => {
-  User.hasOne(models.Role, {
-    foreignKey: 'role_id'
-  })
-  User.hasOne(models.UserData, {
-    foreignKey: 'User_id'
-  })
-}
+Role.hasMany(User, {
+  foreignKey: 'role_id',
+  sourceKey: 'id'
+})
+User.belongsTo(Role, {
+  foreignKey: 'role_id',
+  sourceKey: 'id'
+})
 
 module.exports = User
