@@ -1,16 +1,24 @@
-module.exports.generatePagination = (totalItems, currentPage, perPage, baseUrl) => {
-  const totalPages = Math.ceil(totalItems / perPage)
-
-  const pagination = {
-    page: currentPage,
-    perPage,
-    totalPages,
-    totalCount: totalItems,
-    links: {
-      prev: currentPage > 1 ? `${baseUrl}?page=${currentPage - 1}&limit=${perPage}` : null,
-      next: currentPage < totalPages ? `${baseUrl}?page=${currentPage + 1}&limit=${perPage}` : null
-    }
+class Pagination {
+  constructor (page, size, baseUrl) {
+    this.page = page || 0
+    this.limit = size || 3
+    this.offset = this.page !== 0 ? this.page * this.limit : 0
+    this.baseUrl = baseUrl
   }
 
-  return pagination
+  data (count, data) {
+    return {
+      total_item: count,
+      page: this.page !== 0 ? this.page : 0,
+      item: data,
+      total_pages: Math.ceil(data.count / this.limit),
+      totalCount: data.count,
+      links: {
+        prev: this.page > 1 ? `${this.baseUrl}?page=${this.page - 1}&limit=${this.limit}` : null,
+        next: this.page < this.total_pages ? `${this.baseUrl}?page=${this.page + 1}&limit=${this.limit}` : null
+      }
+    }
+  }
 }
+
+module.exports = Pagination

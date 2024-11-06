@@ -1,8 +1,9 @@
 const { DataTypes } = require('sequelize')
 const db = require('.')
+const User = require('./User')
 
 const UserData = db.define(
-  'user_data', // table name
+  'UserData',
   {
     user_id: {
       type: DataTypes.INTEGER,
@@ -22,14 +23,16 @@ const UserData = db.define(
     }
   },
   {
+    tableName: 'user_data',
     timestamps: false
   }
 )
-
-UserData.associate = (models) => {
-  UserData.belongsTo(models.User, {
-    foreignKey: 'user_id'
-  })
-}
+User.hasOne(UserData, {
+  foreignKey: 'user_id',
+  sourceKey: 'id'
+})
+UserData.belongsTo(User, {
+  foreignKey: 'user_id'
+})
 
 module.exports = UserData

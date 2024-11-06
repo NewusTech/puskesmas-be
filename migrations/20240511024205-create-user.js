@@ -33,7 +33,6 @@ module.exports = {
       },
       role_id: {
         type: Sequelize.INTEGER,
-        defaultValue: 3
       },
       resetpasswordtoken: {
         type: Sequelize.STRING
@@ -66,6 +65,7 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
+    await  queryInterface.removeConstraint('users', 'custom_fkey_role_id')
     await queryInterface.dropTable('Users');
   }
 };

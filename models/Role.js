@@ -2,7 +2,7 @@ const db = require('.')
 const { DataTypes } = require('sequelize')
 
 const Role = db.define(
-  'Roles', // table name
+  'Role', // table name
   {
     name: {
       type: DataTypes.STRING,
@@ -10,10 +10,8 @@ const Role = db.define(
     }
   },
   {
-    timestamps: false,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-    deletedAt: 'deleted_at'
+    tableName: 'Roles',
+    timestamps: false
   }
 )
 

@@ -2,12 +2,12 @@ const passwordHash = require('password-hash')
 const jwt = require('jsonwebtoken')
 const { response } = require('../../helpers/response.formatter')
 const logger = require('../../errorHandler/logger')
-const User = require('../../models/User')
 const baseConfig = require('../../config/base.config')
+const Validator = require('fastest-validator')
+const User = require('../../models/User')
 const UserData = require('../../models/UserData')
 const Role = require('../../models/Role')
 const Token = require('../../models/Token')
-const Validator = require('fastest-validator')
 
 const v = new Validator()
 
@@ -34,6 +34,7 @@ const AuthController = {
 
     try {
       const { name, email, password } = reqBody
+
       const user = await User.findOne({
         where: {
           email

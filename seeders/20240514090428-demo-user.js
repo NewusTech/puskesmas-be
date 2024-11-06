@@ -1,5 +1,6 @@
-const { name } = require('ejs');
+
 const passwordHash = require('password-hash');
+const User = require('../models/User');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -18,7 +19,7 @@ module.exports = {
         email: 'admin.test@e-puskes.com',
         password: passwordHash.generate('password'),
         phone: '123456789xxx',
-        role_id: 1,
+        role_id: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -27,16 +28,17 @@ module.exports = {
         email: 'user.test@e-puskes.com',
         password: passwordHash.generate('password'),
         phone: '123456789xxx',
-        role_id: 2,
+        role_id: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       }
     ];
 
-    await queryInterface.bulkInsert('Users', users, {});
+    //use table name 'users' instead of User
+    await queryInterface.bulkInsert('users', users, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('users', null, {});
   }
 };

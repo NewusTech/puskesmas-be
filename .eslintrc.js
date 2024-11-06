@@ -4,7 +4,6 @@ module.exports = {
     es2021: true,
     node: true
   },
-  // files:'**/*.js',
   ignorePatterns: ['node_modules', 'seeders', 'migrations'],
   extends: 'standard',
   overrides: [
