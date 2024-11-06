@@ -193,7 +193,9 @@ const UserController = {
       if (!user) {
         return res.status(404).json(response(404, 'User not found'))
       }
-      await user.destroy()
+      await user.update({
+        deletedAt: new Date()
+      })
       return res.status(200).json(response(200, 'Delete Success'))
     } catch (error) {
       logger.error(error)

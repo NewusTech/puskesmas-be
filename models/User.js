@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize')
 const db = require('.')
 const Role = require('../models/Role')
+const Puskesmas = require('./Puskesmas')
 
 const User = db.define(
   'users',
@@ -26,6 +27,10 @@ const User = db.define(
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    puskesmas_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true
@@ -46,7 +51,6 @@ const User = db.define(
     }
   },
   {
-
     tableName: 'users',
     timestamps: true
   }
@@ -57,6 +61,16 @@ Role.hasMany(User, {
 })
 User.belongsTo(Role, {
   foreignKey: 'role_id',
+  sourceKey: 'id'
+})
+
+Puskesmas.hasMany(User, {
+  foreignKey: 'puskesmas_id',
+  sourceKey: 'id'
+})
+
+User.belongsTo(Puskesmas, {
+  foreignKey: 'puskesmas_id',
   sourceKey: 'id'
 })
 
