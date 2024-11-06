@@ -24,7 +24,7 @@ const User = db.define(
       allowNull: false
     },
     role_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.ENUM('1', '2', '3', '4', '5'),
       allowNull: false
     },
     puskesmas_id: {
