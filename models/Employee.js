@@ -2,8 +2,8 @@ const { DataTypes, Sequelize } = require('sequelize')
 const db = require('.')
 const Puskesmas = require('./Puskesmas')
 
-const Employees = db.define(
-  'Employees',
+const Employee = db.define(
+  'Employee',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -101,10 +101,15 @@ const Employees = db.define(
       allowNull: false,
       defaultValue: Sequelize.fn('NOW')
     }
+  },
+  {
+    tableName: 'employees',
+    modelName: 'Employee',
+    timestamps: true
   }
 )
 
-Puskesmas.hasMany(Employees, { foreignKey: 'puskesmas_id', sourceKey: 'id' })
-Employees.belongsTo(Puskesmas, { foreignKey: 'puskesmas_id', targetKey: 'id' })
+Puskesmas.hasMany(Employee, { foreignKey: 'puskesmas_id', sourceKey: 'id' })
+Employee.belongsTo(Puskesmas, { foreignKey: 'puskesmas_id', targetKey: 'id' })
 
-module.exports = Employees
+module.exports = Employee
