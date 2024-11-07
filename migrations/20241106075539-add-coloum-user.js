@@ -35,6 +35,10 @@ module.exports = {
       type: Sequelize.JSONB,
       allowNull: true
     });
+    await queryInterface.addColumn('users', 'izin_ruangan', {
+      type: Sequelize.JSONB,
+      allowNull: true
+    })
   },
 
   async down (queryInterface, Sequelize) {

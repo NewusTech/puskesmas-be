@@ -23,7 +23,11 @@ module.exports = {
       posstion_id: {
         type: Sequelize.INTEGER,
         allowNull: false
-      }
+      },
+      keterangan: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       
     })
 

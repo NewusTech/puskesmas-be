@@ -12,6 +12,10 @@ const SubPosition = db.define(
     posstion_id: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    keterangan: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   },
   {
