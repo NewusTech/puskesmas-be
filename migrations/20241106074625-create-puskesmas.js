@@ -19,7 +19,7 @@ module.exports = {
         allowNull: true
       },
       phone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true
       },
       email: {

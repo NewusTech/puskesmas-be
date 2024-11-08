@@ -8,7 +8,7 @@ const JobPosition = db.define(
   {
     sub_position_id: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false
     },
     jabatan: {
       type: DataTypes.STRING,

@@ -26,12 +26,12 @@ const SubPosition = db.define(
 )
 
 Position.hasMany(SubPosition, {
-  foreignKey: 'position_id',
+  foreignKey: 'posstion_id',
   sourceKey: 'id'
 })
 
 SubPosition.belongsTo(Position, {
-  foreignKey: 'position_id',
+  foreignKey: 'posstion_id',
   sourceKey: 'id'
 })
 

@@ -18,7 +18,7 @@ module.exports = {
       },
       sub_position_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: 'sub_position',
           key: 'id'
